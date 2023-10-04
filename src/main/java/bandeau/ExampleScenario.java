@@ -38,7 +38,7 @@ public class ExampleScenario {
         b.setMessage(message);
         b.sleep(2000);
         // On joue le scenario sur le bandeau
-        s.playOn(b);
+        s.playOn((SCBandeau) b);
         b.close();
     }
 

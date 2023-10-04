@@ -1,23 +1,29 @@
 package bandeau;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 public class ExerciceAvecThreads {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ExerciceAvecThreads instance = new ExerciceAvecThreads();
         instance.exemple();
     }
 
-    public void exemple() {
 
+
+    public void exemple() throws InterruptedException {
         Scenario s = makeScenario();
         // On cree les bandeaux
-        Bandeau b1 = new Bandeau();
-        Bandeau b2 = new Bandeau();
-        Bandeau b3 = new Bandeau();
+        SCBandeau b1 = new SCBandeau();
+        SCBandeau b2 = new SCBandeau();
+        SCBandeau b3 = new SCBandeau();
         System.out.println("CTRL-C pour terminer le programme");
         // On doit jouer le scénario en même temps sur les trois bandeaux
         s.playOn(b1);
         s.playOn(b2);
+        s.addEffect(new Zoom("Je zoome", 50), 1);
         s.playOn(b3);
         // On rejoue le scénario sur b1 quand le premier jeu est fini
         s.playOn(b1);
